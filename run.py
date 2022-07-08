@@ -14,7 +14,7 @@ parser = argparse.ArgumentParser(description='PyTorch SimCLR')
 parser.add_argument('-data', metavar='DIR', default='./datasets',
                     help='path to dataset')
 parser.add_argument('-dataset-name', default='stl10',
-                    help='dataset name', choices=['stl10', 'cifar10'])
+                    help='dataset name', choices=['stl10', 'cifar10', 'glomeruli10k'])
 parser.add_argument('-a', '--arch', metavar='ARCH', default='resnet18',
                     choices=model_names,
                     help='model architecture: ' +
@@ -83,6 +83,8 @@ def main():
     with torch.cuda.device(args.gpu_index):
         simclr = SimCLR(model=model, optimizer=optimizer, scheduler=scheduler, args=args)
         simclr.train(train_loader)
+
+# python run.py -data 'C:\Users\nicol\PycharmProjects\IgAGN\GlomeruliDataset\train10k\S_score' -dataset-name glomeruli10k --log-every-n-steps 100 --epochs 100 --batch-size 2 --arch resnet18
 
 
 if __name__ == "__main__":
